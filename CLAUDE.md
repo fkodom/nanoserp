@@ -1,6 +1,6 @@
 # Development Playbook
 
-This document outlines the development guidelines, architecture, and best practices for this FastAPI CRUD repository.
+This document outlines the development guidelines and best practices for the nanoserp Python library.
 
 ## 1. Development Workflow
 
@@ -29,54 +29,19 @@ The regular dependency group should only include packages required for the main 
 
 ## 2. Project Architecture
 
-The application is structured into four distinct layers: **DB**, **Services**, **API**, and **Client**.
+nanoserp is a simple Python library. The package layout is:
 
-### Shared & Custom Types
-- **Shared Types:** Any types shared across the codebase should be placed in `nanoserp/models.py`.
-  - Use `sqlmodel` for any types that also correspond to a Database table.
-- **Custom Types:** You may create custom types within submodules for clarity and consistency.
-  - **API Types:** Factor API endpoints into `views.py` and `schemas.py` files.
-    - Define schemas independently in `schemas.py` and import them into `views.py`.
-    - This ensures they are accessible at the top-level of the repository without circular imports, allowing the Client SDK to use the same type definitions as the API.
+- **`nanoserp/models.py`**: Shared Pydantic data models used throughout the library.
+- **`nanoserp/settings.py`**: Configuration via `pydantic-settings` (reads from environment / `.env` files).
+- **`nanoserp/exceptions.py`**: Exception hierarchy for the library.
 
-### 1. DB Layer
-- **Location:** `nanoserp/db`
-- **Structure:** Generally, each file corresponds to a separate table in the DB for organization and simplicity.
-  - *Exception:* This rule can be modified if multiple tables effectively deal with the same underlying object.
-
-### 2. Services Layer
-- **Location:** `nanoserp/services` (Create if needed)
-- **Responsibility:**
-  - Leverage the DB layer for CRUD interactions.
-  - Perform aggregate actions (e.g., "pull top 5 items from table X, then generate a text summary") that do not conceptually fit into the API or DB layers.
-  - **Note:** Any non-trivial functions or interactions should be factored out of the API and into this layer.
-
-### 3. API Layer
-- **Location:** `nanoserp/api`
-- **Structure:**
-  - Group API endpoints by name into routers.
-  - Import routers into the main API in `nanoserp/api/main.py`.
-- **Responsibility:** Primarily responsible for authentication checks and request/response typing. Logic should be delegated to the Services layer.
-
-### 4. Client Layer
-- **Location:** `nanoserp/client.py` (or `nanoserp/client/` for complex APIs)
-- **Responsibility:** The client SDK must be fully separable from the FastAPI endpoints themselves.
-  - It typically shares request/response schema definitions with the API.
+Runtime dependencies: `httpx`, `pydantic`, `pydantic-settings`.
 
 ## 3. Testing Standards
 
-Strict testing requirements apply to each layer of the application.
-
-- **DB Tests:** Every DB function must have a unit test.
-  - **Fixture:** Use `database_url` from `tests/conftest.py` to test against a temporary database.
-- **Service Tests:** Every public-facing service method must have a unit test.
-  - **Location:** `tests/services/`
-  - **Strategy:** You may mock underlying DB methods entirely if needed, assuming they are verified by DB unit tests.
-- **API Tests:** Every API endpoint must have a unit test.
-  - **Fixture:** Use `mock_app` from `tests/conftest.py` to test against a temporary, local FastAPI server.
-  - **Reference:** See `tests/api/test_example.py`.
-- **Client Tests:** Every client method must have a unit test.
-  - **Fixture:** Use `mock_client` from `tests/conftest.py` to test against a temporary, fully-functional FastAPI client.
+- Every public-facing function or class should have a unit test.
+- Tests live under the `tests/` directory, mirroring the package structure.
+- Run `uv run pytest` to execute the full test suite.
 
 ## 4. General Guidelines
 

@@ -1,8 +1,7 @@
 """
-Generic exception types for the 'nanoserp' library.  The API should handle these
-exception types directly.  It is strongly encouraged to derive custom exception
-types for other parts of the codebase, so that we get clearer error messages without
-overcomplicating the API's exception handling.
+Generic exception types for the 'nanoserp' library.  It is strongly encouraged
+to derive custom exception types for other parts of the codebase, so that we get
+clearer error messages.
 
 NOTE: For readability, please sort in ascending order by status code. :)
 """
@@ -10,25 +9,22 @@ NOTE: For readability, please sort in ascending order by status code. :)
 from typing import Literal, Optional
 
 
-class APIError(Exception):
+class NanoserpError(Exception):
     """Base class for all custom exceptions in the 'nanoserp' library."""
-
-    # status_code: int
-    # name: str
 
     def __init__(self, message: Optional[str] = None) -> None:
         super().__init__(message)
         self.message = message
 
 
-class AuthenticationError(APIError):
+class AuthenticationError(NanoserpError):
     """Generic error for auth-related issues. E.g. invalid API key or expired token."""
 
     name: Literal["authentication_error"] = "authentication_error"
     status_code: Literal[401] = 401
 
 
-class ForbiddenError(APIError):
+class ForbiddenError(NanoserpError):
     """Generic error for when a request is made to a resource that the user is not
     authorized to access.  This is a catch-all for any 403 errors.
     """
@@ -37,7 +33,7 @@ class ForbiddenError(APIError):
     status_code: Literal[403] = 403
 
 
-class NotFoundError(APIError):
+class NotFoundError(NanoserpError):
     """Generic error for when a requested resource is not found.  This is a catch-all for
     any 404 errors.
     """
@@ -46,7 +42,7 @@ class NotFoundError(APIError):
     status_code: Literal[404] = 404
 
 
-class NotAcceptableError(APIError):
+class NotAcceptableError(NanoserpError):
     """Generic error for when a request is invalid because the server cannot produce a
     response that is acceptable.  This could be because of the request's Accept headers,
     or because the request contains impermissible (but otherwise valid) parameters, such
@@ -57,7 +53,7 @@ class NotAcceptableError(APIError):
     status_code: Literal[406] = 406
 
 
-class ConflictError(APIError):
+class ConflictError(NanoserpError):
     """Generic error for when a request is made to create a new resource, but another
     resource with the same ID (or other unique constraint) already exists.
     """
@@ -66,7 +62,7 @@ class ConflictError(APIError):
     status_code: Literal[409] = 409
 
 
-class ContentTooLargeError(APIError):
+class ContentTooLargeError(NanoserpError):
     """Generic error for when a request's payload is too large for the server to process.
     This is a catch-all for any 413 errors.
     """
@@ -75,7 +71,7 @@ class ContentTooLargeError(APIError):
     status_code: Literal[413] = 413
 
 
-class UnprocessableEntityError(APIError):
+class UnprocessableEntityError(NanoserpError):
     """Generic error for when a request is valid, but the server cannot process it.  This
     is a catch-all for any 422 errors.
     """
@@ -84,7 +80,7 @@ class UnprocessableEntityError(APIError):
     status_code: Literal[422] = 422
 
 
-class RateLimitError(APIError):
+class RateLimitError(NanoserpError):
     """Generic error for rate limiting -- both for 'nanoserp' client rate limits,
     and for rate limits on any downstream services (e.g. OpenAI).
     """
@@ -93,7 +89,7 @@ class RateLimitError(APIError):
     status_code: Literal[429] = 429
 
 
-class InternalError(APIError):
+class InternalError(NanoserpError):
     """Generic error for internal server errors.  This is a catch-all for any
     unexpected errors that occur on the server side.
     """
@@ -102,7 +98,7 @@ class InternalError(APIError):
     status_code: Literal[500] = 500
 
 
-class ServiceUnavailableError(APIError):
+class ServiceUnavailableError(NanoserpError):
     """Generic error for when the service is unavailable.  This could be due
     to an internal error, or because an external service is also down (e.g. OpenAI).
     """
