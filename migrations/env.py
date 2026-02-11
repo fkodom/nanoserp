@@ -11,14 +11,15 @@ from sqlalchemy import engine_from_config, pool
 sys.path.append(os.getcwd())
 
 # get the app
-from {{REPO_NAME_SNAKECASE}}.models import SQLModel  # noqa: I001
+from nanoserp.models import SQLModel  # noqa: I001
 
 target_metadata = SQLModel.metadata
 
 config = context.config
 
-config.set_main_option("sqlalchemy.url", os.environ["{{REPO_NAME_ALLCAPS}}_DATABASE_URL"])
-fileConfig(config.config_file_name)
+config.set_main_option("sqlalchemy.url", os.environ["NANOSERP_DATABASE_URL"])
+if config.config_file_name is not None:
+    fileConfig(config.config_file_name)
 
 
 def run_migrations_offline():
@@ -47,8 +48,10 @@ def run_migrations_online():
     and associate a connection with the context.
 
     """
+    section = config.get_section(config.config_ini_section)
+    assert section is not None
     engine = engine_from_config(
-        config.get_section(config.config_ini_section),
+        section,
         prefix="sqlalchemy.",
         poolclass=pool.NullPool,
     )

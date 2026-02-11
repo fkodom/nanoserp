@@ -2,8 +2,8 @@ from urllib.parse import urlparse
 
 import pytest
 
-from {{REPO_NAME_SNAKECASE}}.db.session import get_async_session
-from {{REPO_NAME_SNAKECASE}}.settings import DatabaseSettings
+from nanoserp.db.session import get_async_session
+from nanoserp.settings import DatabaseSettings
 
 
 @pytest.mark.asyncio

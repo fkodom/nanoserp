@@ -1,18 +1,6 @@
-# {{REPO_NAME}}
+# nanoserp
 
-A simple template for Python CRUD applications using `fastapi` and `sqlmodel` with CI/CD configured through GitHub Actions.
-
-
-## Usage
-
-1. Create a new repository, using this one as a template.
-2. Install and open [Claude Code](https://github.com/anthropics/claude-code), then run the `/templatize` command:
-    ```bash
-    $ claude
-    >>> /templatize
-    ```
-
-    **Note:** At your own risk, include the `--allow-dangerously-skip-permissions` flag to make this extra fast.  Shell commands are sandboxed by default, which minimizes much of the risk.
+A tiny, free tool for web search and page scraping leveraging the DuckDuckGo HTML endpoint. Available as both a CLI and Python package.
 
 
 ## Install

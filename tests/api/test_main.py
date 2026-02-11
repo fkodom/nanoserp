@@ -1,6 +1,6 @@
 from fastapi.testclient import TestClient
 
-from {{REPO_NAME_SNAKECASE}}.api.main import HealthResponse, app
+from nanoserp.api.main import HealthResponse, app
 
 
 def test_import_app():

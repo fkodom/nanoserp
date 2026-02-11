@@ -9,8 +9,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
-from {{REPO_NAME_SNAKECASE}}.api.example.views import router as example_router
-from {{REPO_NAME_SNAKECASE}}.exceptions import APIError
+from nanoserp.api.example.views import router as example_router
+from nanoserp.exceptions import APIError
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -22,7 +22,7 @@ v1_router.include_router(example_router, prefix="/examples", tags=["examples"])
 app = FastAPI()
 app.include_router(v1_router, prefix="/api/v1")
 app.add_middleware(
-    CORSMiddleware,
+    CORSMiddleware,  # type: ignore[arg-type]
     allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
@@ -32,7 +32,7 @@ app.add_middleware(
 
 @app.exception_handler(APIError)
 async def api_error_handler(request: Request, exc: APIError):
-    """A generic error handler for all custom exceptions in '{{REPO_NAME}}'. If any
+    """A generic error handler for all custom exceptions in 'nanoserp'. If any
     other, targeted error handlers are needed, please add them *above* this method.
     FastAPI will use the first matching error handler it finds, so order matters.
     """

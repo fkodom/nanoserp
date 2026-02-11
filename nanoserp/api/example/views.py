@@ -3,11 +3,11 @@ from typing import Annotated
 from fastapi import APIRouter, Depends
 from starlette.status import HTTP_201_CREATED
 
-from {{REPO_NAME_SNAKECASE}}.api.example.schemas import (
+from nanoserp.api.example.schemas import (
     ExampleRequest,
     ExampleResponse,
 )
-from {{REPO_NAME_SNAKECASE}}.api.security import verify_token
+from nanoserp.api.security import verify_token
 
 router = APIRouter()
 

@@ -25,14 +25,14 @@ To add a new dependency, use `uv` to ensure it is added to the correct dependenc
 uv add <package-name>             # For regular dependencies
 uv add <package-name> --dev       # For development dependencies
 ```
-The regular dependency group should only include packages required for the main `{{REPO_NAME_SNAKECASE}}` module to function. All other packages (e.g., testing, linting, formatting tools) should go into the development group, unless otherwise specified.
+The regular dependency group should only include packages required for the main `nanoserp` module to function. All other packages (e.g., testing, linting, formatting tools) should go into the development group, unless otherwise specified.
 
 ## 2. Project Architecture
 
 The application is structured into four distinct layers: **DB**, **Services**, **API**, and **Client**.
 
 ### Shared & Custom Types
-- **Shared Types:** Any types shared across the codebase should be placed in `{{REPO_NAME_SNAKECASE}}/models.py`.
+- **Shared Types:** Any types shared across the codebase should be placed in `nanoserp/models.py`.
   - Use `sqlmodel` for any types that also correspond to a Database table.
 - **Custom Types:** You may create custom types within submodules for clarity and consistency.
   - **API Types:** Factor API endpoints into `views.py` and `schemas.py` files.
@@ -40,26 +40,26 @@ The application is structured into four distinct layers: **DB**, **Services**, *
     - This ensures they are accessible at the top-level of the repository without circular imports, allowing the Client SDK to use the same type definitions as the API.
 
 ### 1. DB Layer
-- **Location:** `{{REPO_NAME_SNAKECASE}}/db`
+- **Location:** `nanoserp/db`
 - **Structure:** Generally, each file corresponds to a separate table in the DB for organization and simplicity.
   - *Exception:* This rule can be modified if multiple tables effectively deal with the same underlying object.
 
 ### 2. Services Layer
-- **Location:** `{{REPO_NAME_SNAKECASE}}/services` (Create if needed)
+- **Location:** `nanoserp/services` (Create if needed)
 - **Responsibility:**
   - Leverage the DB layer for CRUD interactions.
   - Perform aggregate actions (e.g., "pull top 5 items from table X, then generate a text summary") that do not conceptually fit into the API or DB layers.
   - **Note:** Any non-trivial functions or interactions should be factored out of the API and into this layer.
 
 ### 3. API Layer
-- **Location:** `{{REPO_NAME_SNAKECASE}}/api`
+- **Location:** `nanoserp/api`
 - **Structure:**
   - Group API endpoints by name into routers.
-  - Import routers into the main API in `{{REPO_NAME_SNAKECASE}}/api/main.py`.
+  - Import routers into the main API in `nanoserp/api/main.py`.
 - **Responsibility:** Primarily responsible for authentication checks and request/response typing. Logic should be delegated to the Services layer.
 
 ### 4. Client Layer
-- **Location:** `{{REPO_NAME_SNAKECASE}}/client.py` (or `{{REPO_NAME_SNAKECASE}}/client/` for complex APIs)
+- **Location:** `nanoserp/client.py` (or `nanoserp/client/` for complex APIs)
 - **Responsibility:** The client SDK must be fully separable from the FastAPI endpoints themselves.
   - It typically shares request/response schema definitions with the API.
 

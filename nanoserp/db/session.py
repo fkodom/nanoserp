@@ -7,7 +7,7 @@ from typing import AsyncGenerator
 from sqlalchemy.ext.asyncio import AsyncEngine, create_async_engine
 from sqlmodel.ext.asyncio.session import AsyncSession
 
-from {{REPO_NAME_SNAKECASE}}.settings import DatabaseSettings
+from nanoserp.settings import DatabaseSettings
 
 
 class SessionManager:

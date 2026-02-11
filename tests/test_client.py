@@ -1,6 +1,6 @@
 import pytest
 
-from {{REPO_NAME_SNAKECASE}}.client import AsyncClient
+from nanoserp.client import AsyncClient
 
 
 @pytest.mark.asyncio

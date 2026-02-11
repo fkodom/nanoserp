@@ -10,8 +10,8 @@ from pytest_postgresql import factories
 from pytest_postgresql.executor import PostgreSQLExecutor
 from pytest_postgresql.janitor import DatabaseJanitor
 
-from {{REPO_NAME_SNAKECASE}}.api import main as api_main
-from {{REPO_NAME_SNAKECASE}}.client import AsyncClient
+from nanoserp.api import main as api_main
+from nanoserp.client import AsyncClient
 
 TEST_API_KEY = "test-api-key-1234567890"
 
@@ -72,8 +72,8 @@ def mock_app(database_url: str) -> Generator[TestClient, None, None]:
     with patch.dict(
         os.environ,
         {
-            "{{REPO_NAME_ALLCAPS}}_API_KEY": TEST_API_KEY,
-            "{{REPO_NAME_ALLCAPS}}_DATABASE_URL": database_url,
+            "NANOSERP_API_KEY": TEST_API_KEY,
+            "NANOSERP_DATABASE_URL": database_url,
         },
     ):
         reload(api_main)

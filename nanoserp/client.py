@@ -4,11 +4,11 @@ from typing import Callable, Coroutine
 
 import httpx
 
-from {{REPO_NAME_SNAKECASE}}.api.example.schemas import (
+from nanoserp.api.example.schemas import (
     ExampleRequest,
     ExampleResponse,
 )
-from {{REPO_NAME_SNAKECASE}}.exceptions import (
+from nanoserp.exceptions import (
     APIError,
     AuthenticationError,
     InternalError,
@@ -17,7 +17,7 @@ from {{REPO_NAME_SNAKECASE}}.exceptions import (
     RateLimitError,
     ServiceUnavailableError,
 )
-from {{REPO_NAME_SNAKECASE}}.settings import AuthSettings
+from nanoserp.settings import AuthSettings
 
 logger = logging.getLogger(__name__)
 

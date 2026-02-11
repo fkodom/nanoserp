@@ -1,6 +1,6 @@
 from fastapi.testclient import TestClient
 
-from {{REPO_NAME_SNAKECASE}}.settings import AuthSettings
+from nanoserp.settings import AuthSettings
 
 
 def test_example_crud(mock_app: TestClient):

@@ -4,8 +4,8 @@ from typing import Annotated
 from fastapi import Depends
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
-from {{REPO_NAME_SNAKECASE}}.exceptions import AuthenticationError
-from {{REPO_NAME_SNAKECASE}}.settings import AuthSettings
+from nanoserp.exceptions import AuthenticationError
+from nanoserp.settings import AuthSettings
 
 security = HTTPBearer()
 

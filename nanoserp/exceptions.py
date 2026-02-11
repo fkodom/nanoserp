@@ -1,5 +1,5 @@
 """
-Generic exception types for the '{{REPO_NAME}}' library.  The API should handle these
+Generic exception types for the 'nanoserp' library.  The API should handle these
 exception types directly.  It is strongly encouraged to derive custom exception
 types for other parts of the codebase, so that we get clearer error messages without
 overcomplicating the API's exception handling.
@@ -11,7 +11,7 @@ from typing import Literal, Optional
 
 
 class APIError(Exception):
-    """Base class for all custom exceptions in the '{{REPO_NAME}}' library."""
+    """Base class for all custom exceptions in the 'nanoserp' library."""
 
     # status_code: int
     # name: str
@@ -85,7 +85,7 @@ class UnprocessableEntityError(APIError):
 
 
 class RateLimitError(APIError):
-    """Generic error for rate limiting -- both for '{{REPO_NAME}}' client rate limits,
+    """Generic error for rate limiting -- both for 'nanoserp' client rate limits,
     and for rate limits on any downstream services (e.g. OpenAI).
     """
 
