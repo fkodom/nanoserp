@@ -11,6 +11,7 @@ license = {text = "MIT"}
 dynamic = ["version", "readme"]  # NOTE: Must be in sync with [tool.setuptools.dynamic] below
 dependencies = [
     "httpx==0.28.1",
+    "markdownify==1.2.2",
     "pydantic==2.12.5",
     "pydantic-settings==2.12.0",
 ]
@@ -19,7 +20,7 @@ classifiers = ["Programming Language :: Python :: 3"]
 
 [tool.setuptools.dynamic]
 # NOTE: Must be in sync with 'project.dynamic' above
-version = {attr = "nanoserp.VERSION"}
+version = {attr = "nanoserp._version.VERSION"}
 readme = {file = ["README.md"], content-type = "text/markdown"}
 
 [tool.setuptools.packages.find]

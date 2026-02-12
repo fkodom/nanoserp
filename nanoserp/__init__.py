@@ -1,18 +1,5 @@
-import os
-from subprocess import getoutput
+from nanoserp._version import VERSION
+from nanoserp.models import DateFilter, SearchResponse, SearchResult
+from nanoserp.search import search
 
-
-def get_version_tag() -> str:
-    try:
-        env_key = "NANOSERP_VERSION".upper()
-        version = os.environ[env_key]
-    except KeyError:
-        version = getoutput("git describe --tags --abbrev=0")
-
-    if version.lower().startswith("fatal"):
-        version = "0.0.0"
-
-    return version
-
-
-VERSION = get_version_tag()
+__all__ = ["VERSION", "DateFilter", "SearchResponse", "SearchResult", "search"]
