@@ -240,6 +240,10 @@ def search(
             form_data["s"] = str(offset)
             form_data["dc"] = str(offset + 1)
             form_data["vqd"] = vqd
+            form_data["v"] = "l"
+            form_data["o"] = "json"
+            form_data["api"] = "d.js"
+            form_data["kl"] = "wt-wt"
 
         response = httpx.post(
             _BASE_URL, data=form_data, headers=headers, timeout=timeout

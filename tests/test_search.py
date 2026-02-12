@@ -239,6 +239,10 @@ class TestSearch:
         assert form_data["s"] == "10"
         assert form_data["dc"] == "11"
         assert form_data["vqd"] == "4-token"
+        assert form_data["v"] == "l"
+        assert form_data["o"] == "json"
+        assert form_data["api"] == "d.js"
+        assert form_data["kl"] == "wt-wt"
 
     @patch("nanoserp.search.httpx.post")
     def test_offset_with_date_filter_includes_df(self, mock_post):
