@@ -26,3 +26,14 @@ class SearchResponse(BaseModel):
     query: str
     results: list[SearchResult]
     vqd: str | None = None
+
+
+class ScrapeLink(BaseModel):
+    text: str
+    url: str
+
+
+class ScrapeResponse(BaseModel):
+    url: str
+    markdown: str
+    links: list[ScrapeLink]
