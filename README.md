@@ -12,6 +12,14 @@ pip install nanoserp
 
 Requires Python 3.11+.
 
+### Claude Code Skill
+
+To install `nanoserp` as a [skill](https://docs.anthropic.com/en/docs/claude-code/skills) for Claude Code and other coding agents:
+
+```bash
+npx skills add https://github.com/fkodom/nanoserp --skill nanoserp
+```
+
 ## CLI
 
 ### Search
