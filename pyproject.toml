@@ -18,6 +18,9 @@ dependencies = [
 requires-python = ">=3.11"
 classifiers = ["Programming Language :: Python :: 3"]
 
+[project.scripts]
+nanoserp = "nanoserp.cli:main"
+
 [tool.setuptools.dynamic]
 # NOTE: Must be in sync with 'project.dynamic' above
 version = {attr = "nanoserp._version.VERSION"}
